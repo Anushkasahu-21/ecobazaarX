@@ -9,7 +9,7 @@ public class LoginRequest {
 	@Email(message="Enter a Valid Email")
 	private String email;
 	
-	//commit
+	
 	@NotBlank(message="Password is Recquired")
 	private String password;
 
