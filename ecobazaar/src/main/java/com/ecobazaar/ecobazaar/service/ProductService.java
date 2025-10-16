@@ -42,5 +42,12 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 	
+	public List<Product> getEcoCertifiedProducts(){
+		return productRepository.findByEcoCertifiedTrue();
+	}
+	
+	public List<Product> getEcoCertifiedSortedByCarbonImpact(){
+		return productRepository.findByEcoCertifiedTrueOrderByCarbonImpactAsc();
+	}
 	
 }
