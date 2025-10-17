@@ -16,7 +16,6 @@ import com.ecobazaar.ecobazaar.service.CartService;
 @RequestMapping("/api/cart")
 public class CartController {
 
-
 	private final CartService cartService;
 	
 	public CartController(CartService cartService) {
@@ -31,8 +30,7 @@ public class CartController {
 	@GetMapping("/{userId}")
 	public CartSummaryDto getCartSummary(@PathVariable Long userId) {
 		return cartService.getCartSummary(userId);
-	} 
-	
+	}
 	
 	@DeleteMapping("/{id}")
 	public String removeFromCart(@PathVariable Long id) {

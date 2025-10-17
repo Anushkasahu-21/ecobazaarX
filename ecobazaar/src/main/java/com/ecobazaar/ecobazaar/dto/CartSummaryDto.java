@@ -56,4 +56,5 @@ private List<CartItem> items;
 	public void setEcoSuggestion(String ecoSuggestion) {
 		this.ecoSuggestion = ecoSuggestion;
 	}
+	
 }
