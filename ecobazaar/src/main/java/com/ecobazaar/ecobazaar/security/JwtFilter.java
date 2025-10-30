@@ -18,9 +18,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class JwtFilter extends OncePerRequestFilter{
+public class JwtFilter extends OncePerRequestFilter {
 
-	private final com.ecobazaar.ecobazaar.util.JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
     public JwtFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
@@ -34,7 +34,6 @@ public class JwtFilter extends OncePerRequestFilter{
 
         String header = request.getHeader("Authorization");
 
-        // If no token, continue filter chain
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -42,25 +41,23 @@ public class JwtFilter extends OncePerRequestFilter{
 
         String token = header.substring(7);
 
-        // Validate token
         if (!jwtUtil.validateToken(token)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // Extract claims (email + role)
         Claims claims = jwtUtil.getClaims(token);
         String email = claims.getSubject();
         String role = claims.get("role", String.class);
+        Long userId = claims.get("userId", Long.class); 
 
-        // Create Spring Authentication object
         var authority = new SimpleGrantedAuthority(role);
         var auth = new UsernamePasswordAuthenticationToken(email, null, Collections.singletonList(authority));
 
-        // Save authentication in context
-        SecurityContextHolder.getContext().setAuthentication(auth);
+       
+        auth.setDetails(userId);
 
-        // Continue request
+        SecurityContextHolder.getContext().setAuthentication(auth);
         filterChain.doFilter(request, response);
     }
 }
