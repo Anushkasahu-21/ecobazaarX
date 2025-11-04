@@ -1,14 +1,14 @@
 package com.ecobazaar.ecobazaar.service;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.ecobazaar.ecobazaar.dto.LoginRequest;
 import com.ecobazaar.ecobazaar.dto.RegisterRequest;
 import com.ecobazaar.ecobazaar.dto.UserResponse;
 import com.ecobazaar.ecobazaar.model.User;
 import com.ecobazaar.ecobazaar.repository.UserRepository;
 import com.ecobazaar.ecobazaar.util.JwtUtil;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
@@ -31,12 +31,8 @@ public class AuthService {
             throw new RuntimeException("Email already exists!");
         }
 
-        // Default role = ROLE_USER
-        String role = request.getRole() == null ? "ROLE_USER" : "ROLE_" + request.getRole().toUpperCase();
-
-        if (role.equals("ROLE_ADMIN")) {
-            throw new RuntimeException("Cannot self-register as admin!");
-        }
+        // ✅ Always assign ROLE_USER (ignore whatever is sent in request)
+        String role = "ROLE_USER";
 
         User user = new User();
         user.setName(request.getName());
@@ -49,6 +45,7 @@ public class AuthService {
 
         return new UserResponse(saved.getId(), saved.getName(), saved.getEmail(), saved.getRole(), 0, null);
     }
+
 
     // ✅ Login user
     public UserResponse login(LoginRequest login) {

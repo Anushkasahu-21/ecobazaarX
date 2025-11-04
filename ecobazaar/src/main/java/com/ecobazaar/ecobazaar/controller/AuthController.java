@@ -1,35 +1,35 @@
 package com.ecobazaar.ecobazaar.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.ecobazaar.ecobazaar.dto.LoginRequest;
 import com.ecobazaar.ecobazaar.dto.RegisterRequest;
 import com.ecobazaar.ecobazaar.dto.UserResponse;
 import com.ecobazaar.ecobazaar.service.AuthService;
-
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-	private final AuthService authService;
-	
-	public AuthController(AuthService authService) {
-		this.authService=authService;
-	}
-	
-	@PostMapping("/register")
-	public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest register){
-		return ResponseEntity.ok(authService.register(register));
-	}
-	
-	@PostMapping("/login")
-	public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest login){
-		return ResponseEntity.ok(authService.login(login));
-	}
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
+        try {
+            return ResponseEntity.ok(authService.register(request));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponse> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
 }
