@@ -9,9 +9,11 @@ import com.ecobazaar.ecobazaar.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	List<Product> findByEcoCertifiedTrue();
-	
-	List<Product> findByEcoCertifiedTrueOrderByCarbonImpactAsc();
-	
-	Optional<Product> findFirstByEcoCertifiedTrueAndNameContainingIgnoreCase(String namePart);
+    List<Product> findByEcoCertifiedTrue();
+
+    List<Product> findByEcoCertifiedTrueOrderByCarbonImpactAsc();
+
+    Optional<Product> findFirstByEcoCertifiedTrueAndNameContainingIgnoreCase(String namePart);
+
+    // No need to declare findById — JpaRepository already provides Optional<Product> findById(ID id);
 }

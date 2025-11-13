@@ -1,52 +1,58 @@
 package com.ecobazaar.ecobazaar.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.ecobazaar.ecobazaar.model.Product;
 import com.ecobazaar.ecobazaar.repository.ProductRepository;
 
 @Service
 public class ProductService {
-	
-	 private final ProductRepository productRepository;
 
-	    public ProductService(ProductRepository productRepository) {
-	        this.productRepository = productRepository;
-	    }
+    private final ProductRepository productRepository;
 
-	    public Product createProduct(Product product) {
-	        product.setEcoCertified(false);
-	        return productRepository.save(product);
-	    }
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
-	    public List<Product> getAllProducts() {
-	        return productRepository.findAll();
-	    }
+    public Product createProduct(Product product) {
+        product.setEcoCertified(false);
+        return productRepository.save(product);
+    }
 
-	    public Product updateProductDetails(Long id, Product updateProduct) {
-	        return productRepository.findById(id)
-	                .map(product -> {
-	                    product.setName(updateProduct.getName());
-	                    product.setDetails(updateProduct.getDetails());
-	                    product.setPrice(updateProduct.getPrice());
-	                    product.setCarbonImpact(updateProduct.getCarbonImpact());
-	                    product.setSellerId(updateProduct.getSellerId());
-	                    return productRepository.save(product);
-	                })
-	                .orElseThrow(() -> new RuntimeException("Product not found"));
-	    }
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
-	    public void deleteProductDetails(Long id) {
-	        productRepository.deleteById(id);
-	    }
+    public Product updateProductDetails(Long id, Product updateProduct) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    product.setName(updateProduct.getName());
+                    product.setDetails(updateProduct.getDetails());
+                    product.setPrice(updateProduct.getPrice());
+                    product.setCarbonImpact(updateProduct.getCarbonImpact());
+                    product.setSellerId(updateProduct.getSellerId());
+                    return productRepository.save(product);
+                })
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+    }
 
-	    public List<Product> getEcoCertifiedProducts() {
-	        return productRepository.findByEcoCertifiedTrue();
-	    }
+    public void deleteProductDetails(Long id) {
+        productRepository.deleteById(id);
+    }
 
-	    public List<Product> getEcoCertifiedSortedByCarbonImpact() {
-	        return productRepository.findByEcoCertifiedTrueOrderByCarbonImpactAsc();
-	    }
+    public List<Product> getEcoCertifiedProducts() {
+        return productRepository.findByEcoCertifiedTrue();
+    }
+
+    public List<Product> getEcoCertifiedSortedByCarbonImpact() {
+        return productRepository.findByEcoCertifiedTrueOrderByCarbonImpactAsc();
+    }
+    
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+    }
+
+    
+
 }
