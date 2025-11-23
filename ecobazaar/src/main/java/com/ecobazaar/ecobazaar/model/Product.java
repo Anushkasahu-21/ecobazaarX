@@ -1,94 +1,70 @@
 package com.ecobazaar.ecobazaar.model;
 
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product {
-	
-	 	@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	    
-	    private String name;
-	    
-	    private String details;
-	    
-	    private Double price;
-	    
-	    private Double carbonImpact;
-	    
-	   
-	    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-	    private Boolean ecoCertified = false;
-	    
-	    private Long sellerId;
-	    
-	    private String imageUrl;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	    
-	    public String getImageUrl() {
-			return imageUrl;
-		}
+    private String name;
+    private String details;
+    private Double price;
+    private Double carbonImpact;
+    private String imageUrl;
 
-		public void setImageUrl(String imageUrl) {
-			this.imageUrl = imageUrl;
-		}
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean ecoCertified = false;
 
-		public Long getId() {
-	        return id;
-	    }
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean ecoRequested = false;
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id")
+    private User seller;
 
-	    public String getName() {
-	        return name;
-	    }
+    // ==================== GETTERS & SETTERS ====================
 
-	    public void setName(String name) {
-	        this.name = name;
-	    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-	    public String getDetails() {
-	        return details;
-	    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-	    public void setDetails(String details) {
-	        this.details = details;
-	    }
+    public String getDetails() { return details; }
+    public void setDetails(String details) { this.details = details; }
 
-	    public Double getPrice() {
-	        return price;
-	    }
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 
-	    public void setPrice(Double price) {
-	        this.price = price;
-	    }
+    public Double getCarbonImpact() { return carbonImpact; }
+    public void setCarbonImpact(Double carbonImpact) { this.carbonImpact = carbonImpact; }
 
-	    public Double getCarbonImpact() {
-	        return carbonImpact;
-	    }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-	    public void setCarbonImpact(Double carbonImpact) {
-	        this.carbonImpact = carbonImpact;
-	    }
+    // BOOLEAN GETTERS — THIS IS THE FIX!
+    public boolean isEcoCertified() { return ecoCertified; }
+    public void setEcoCertified(boolean ecoCertified) { this.ecoCertified = ecoCertified; }
 
-	    public Boolean getEcoCertified() {
-	        return ecoCertified;
-	    }
+    public boolean isEcoRequested() { return ecoRequested; }
+    public void setEcoRequested(boolean ecoRequested) { this.ecoRequested = ecoRequested; }
 
-	    public void setEcoCertified(Boolean ecoCertified) {
-	        this.ecoCertified = ecoCertified;
-	    }
+    // For backward compatibility with old code that used Boolean
+    public Boolean getEcoCertified() { return ecoCertified; }
+    public Boolean getEcoRequested() { return ecoRequested; }
 
-	    public Long getSellerId() {
-	        return sellerId;
-	    }
+    public void setEcoCertified(Boolean ecoCertified) { this.ecoCertified = ecoCertified != null ? ecoCertified : false; }
+    public void setEcoRequested(Boolean ecoRequested) { this.ecoRequested = ecoRequested != null ? ecoRequested : false; }
 
-	    public void setSellerId(Long sellerId) {
-	        this.sellerId = sellerId;
-	    }
+    public User getSeller() { return seller; }
+    
+    public void setSeller(User seller) { this.seller = seller; }
+
+    public Long getSellerId() { return seller != null ? seller.getId() : null; }
+    public void setSellerId(Long sellerId) { }
 }

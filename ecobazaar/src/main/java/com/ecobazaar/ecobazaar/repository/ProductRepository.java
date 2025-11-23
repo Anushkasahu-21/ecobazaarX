@@ -1,19 +1,17 @@
 package com.ecobazaar.ecobazaar.repository;
 
+import com.ecobazaar.ecobazaar.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.ecobazaar.ecobazaar.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByEcoCertifiedTrue();
-
     List<Product> findByEcoCertifiedTrueOrderByCarbonImpactAsc();
-
     Optional<Product> findFirstByEcoCertifiedTrueAndNameContainingIgnoreCase(String namePart);
+    List<Product> findByEcoRequestedTrue();
 
-    // No need to declare findById — JpaRepository already provides Optional<Product> findById(ID id);
+    // CORRECT METHOD NAME FOR JPA RELATIONSHIP
+    List<Product> findBySeller_Id(Long sellerId);
 }
