@@ -52,9 +52,15 @@ public class AdminService {
     public Map<String, Object> getAdminReport(){
         List<Order> orders = orderRepository.findAll();
 
-        double totalCarbonUsed = orders.stream().mapToDouble(Order::getCarbonUsed).sum();
-        double totalCarbonSaved = orders.stream().mapToDouble(Order::getCarbonSaved).sum();
-        double totalRevenue = orders.stream().mapToDouble(Order::getTotalPrice).sum();
+        double totalCarbonUsed = orders.stream()
+                .mapToDouble(o -> o.getCarbonUsed() == null ? 0 : o.getCarbonUsed())
+                .sum();
+        double totalCarbonSaved = orders.stream()
+                .mapToDouble(o -> o.getCarbonSaved() == null ? 0 : o.getCarbonSaved())
+                .sum();
+        double totalRevenue = orders.stream()
+                .mapToDouble(o -> o.getTotalPrice() == null ? 0 : o.getTotalPrice())
+                .sum();
 
         Map<String, Object> report = new HashMap<>();
         report.put("totalOrders", orders.size());

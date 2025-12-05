@@ -22,22 +22,22 @@ public class Order {
     @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @Column(name = "carbon_used")
-    private double carbonUsed;
+    @Column(name = "carbon_used",nullable=false)
+    private Double carbonUsed;   // <-- changed
 
-    @Column(name = "carbon_saved")
-    private double carbonSaved;
+    @Column(name = "carbon_saved",nullable=false)
+    private Double carbonSaved;  // <-- changed
 
-    @Column(name = "total_carbon", nullable = false)
-    private double totalCarbon;
+    @Column(name = "total_carbon",nullable=false)
+    private Double totalCarbon;  // <-- changed
 
-    @Column(name = "total_price")
-    private double totalPrice;
+    @Column(name = "total_price",nullable=false)
+    private Double totalPrice;   // <-- changed
 
     public Order() {}
 
     public Order(Long id, Long userId, LocalDate orderDate,
-                 double carbonUsed, double carbonSaved, double totalCarbon, double totalPrice) {
+                 Double carbonUsed, Double carbonSaved, Double totalCarbon, Double totalPrice) {
         this.id = id;
         this.userId = userId;
         this.orderDate = orderDate;
@@ -56,15 +56,15 @@ public class Order {
     public LocalDate getOrderDate() { return orderDate; }
     public void setOrderDate(LocalDate orderDate) { this.orderDate = orderDate; }
 
-    public double getCarbonUsed() { return carbonUsed; }
-    public void setCarbonUsed(double carbonUsed) { this.carbonUsed = carbonUsed; }
+    public Double getCarbonUsed() { return carbonUsed; }
+    public void setCarbonUsed(Double carbonUsed) { this.carbonUsed = carbonUsed; }
 
-    public double getCarbonSaved() { return carbonSaved; }
-    public void setCarbonSaved(double carbonSaved) { this.carbonSaved = carbonSaved; }
+    public Double getCarbonSaved() { return carbonSaved; }
+    public void setCarbonSaved(Double carbonSaved) { this.carbonSaved = carbonSaved; }
 
-    public double getTotalCarbon() { return totalCarbon; }
-    public void setTotalCarbon(double totalCarbon) { this.totalCarbon = totalCarbon; }
+    public Double getTotalCarbon() { return totalCarbon; }
+    public void setTotalCarbon(Double totalCarbon) { this.totalCarbon = totalCarbon; }
 
-    public double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public Double getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
 }
