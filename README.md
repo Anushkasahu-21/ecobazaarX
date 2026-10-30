@@ -1,9 +1,11 @@
 🌱 About the Project
+
 Traditional e-commerce platforms generally focus on product price and features, while the environmental impact of a purchase can be difficult for customers to understand. EcoBazaar-X aims to make sustainability information more visible during online shopping.
 
 The project combines e-commerce functionality with carbon-footprint awareness. Its planned platform experience includes product-level CO₂ information, greener alternatives, a cart that considers both price and carbon impact, sustainability insights, and administrative tools for managing products and eco-verification.
 
 ⚠️ Problem Statement
+
 EcoBazaar-X addresses several challenges associated with sustainable online shopping:
 - Limited environmental transparency: Customers may not know the environmental impact of products.
 - Difficulty finding greener alternatives: Eco-friendly substitutes can be difficult to identify.
@@ -12,6 +14,7 @@ EcoBazaar-X addresses several challenges associated with sustainable online shop
 - Limited motivation: Customers may have few incentives to make more sustainable choices.
   
 🎯 Objectives
+
 - Encourage environmentally conscious purchasing decisions.
 - Make product carbon-footprint information easier to understand.
 - Help customers compare products and identify greener alternatives.
@@ -20,6 +23,7 @@ EcoBazaar-X addresses several challenges associated with sustainable online shop
 - Support seller product management and administrator oversight.
   
 ✨ Key Features
+
 - Product Carbon-Footprint Display: Present CO₂ impact information for products where data is available.
 - Eco-Friendly Recommendations: Help users discover greener alternatives.
 - Smart Carbon Cart: Show product prices alongside their estimated carbon impact.
@@ -32,6 +36,7 @@ EcoBazaar-X addresses several challenges associated with sustainable online shop
 Feature availability depends on the current implementation and connected data sources. Carbon-footprint values and eco-certification claims should be based on reliable, verifiable information.
 
 🧩 Project Modules
+
 1. User and Authentication
 Handles user registration, login, and dashboard access. The project uses JWT-related authentication functionality in its backend.
 2. Product Catalog and Carbon Data
@@ -44,6 +49,7 @@ Provides sustainability insights, carbon-saving history, achievements, and repor
 Supports administration of users, sellers, products, eco-verification, and platform-level information.
 
 🛠️ Technology Stack
+
 Layer	Technology
 Frontend	Angular
 Frontend language	TypeScript
@@ -59,6 +65,7 @@ Version control	Git and GitHub
 
 
 🏗️ System Architecture
+
                    ┌─────────────────────┐
                    │        User         │
                    └──────────┬──────────┘
@@ -83,6 +90,7 @@ Version control	Git and GitHub
 The Angular application communicates with the Spring Boot backend through HTTP APIs. The backend processes requests and uses Spring Data JPA/Hibernate to interact with MySQL. Authentication and authorization are handled by the security configuration implemented in the backend.
 
 📁 Repository Structure
+
 The repository contains separate frontend and backend directories:
 ecobazaarX/
 ├── ecobazaar/                 # Spring Boot backend
@@ -101,6 +109,7 @@ ecobazaarX/
 └── README.md
 
 ✅ Prerequisites
+
 Install the following before running the project locally:
 - Java Development Kit (JDK) 21
 - Maven, or the Maven Wrapper included with the project
@@ -110,6 +119,7 @@ Install the following before running the project locally:
 - An IDE or editor, such as Spring Tool Suite, IntelliJ IDEA, or Visual Studio Code
 
 🔮 Future Enhancements
+
 Planned ideas for future development include:
 - More eco-friendly product categories.
 - Partnerships with recycling businesses.
